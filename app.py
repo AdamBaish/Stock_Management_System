@@ -29,5 +29,10 @@ def item_search():
     return render_template("item_search.html")
 
 
+@app.route('/search_results')
+def search_results():
+    return render_template("search_results.html")
+    
+
 if __name__ == '__main__':
     app.run()
