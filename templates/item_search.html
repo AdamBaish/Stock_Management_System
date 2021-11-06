@@ -36,7 +36,11 @@
 </head>
 <body>
 <h1>Item search page <small>add a searchbar here linking into search_results</small></h1>
-
+<form class="d-flex">
+    <p class="text-danger" id="emptyError" style="display: none;">Please enter something to search.</p>
+    <input class="form-control me-2" type="text" id="mainSearchBar" placeholder="Search for products">
+    <button class="btn btn-primary" onclick="mainSearch()" type="button">Search</button>
+</form>
 
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -60,6 +64,20 @@ function navSearch(){
     //Function to allow the usage of the search bar in the top right
     var toSearch = document.getElementById("navSearchBar").value;
     var store = getParameterByName('store');
+    if (store != ""){
+        var linkToSearch =  "/search_results?search=" + toSearch + "&store=" + store;
+    }else{
+        var linkToSearch =  "/search_results?search=" + toSearch;
+    }
+    window.location.href = linkToSearch;
+}
+function mainSearch(){
+    //Function to allow the usage of the search bar in the top right
+    var toSearch = document.getElementById("mainSearchBar").value;
+    var store = getParameterByName('store');
+    if (toSearch == ''){
+        document.getElementById(emptyError).style.display = 'block';
+    }
     if (store != ""){
         var linkToSearch =  "/search_results?search=" + toSearch + "&store=" + store;
     }else{
