@@ -36,7 +36,7 @@
 </head>
 
 <body>
-<h1>This is the page where items will show</h1>
+<h1 id="target">Error showing results</h1>
 
 
 
@@ -69,6 +69,13 @@
         }
         window.location.href = linkToSearch;
     }
+
+    function onLoad(){
+        var store = getParameterByName('store');
+        var search = getParameterByName('search');
+        document.getElementById("target").textContent = "Displaying results for " + search + " in the " + store + " store"
+    }
+    onLoad();
     </script>
 </body>
 </html>
