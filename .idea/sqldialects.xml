@@ -2,7 +2,6 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$USER_HOME$/Downloads/StockManagementSystem.sql" dialect="PostgreSQL" />
-    <file url="file://$USER_HOME$/Downloads/StockManagementSystem_v1.1.sql" dialect="PostgreSQL" />
     <file url="file://$USER_HOME$/Downloads/new.sql" dialect="PostgreSQL" />
   </component>
 </project>
