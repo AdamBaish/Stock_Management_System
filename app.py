@@ -3,20 +3,82 @@ app.py
 """
 
 
+from re import L
 from flask import Flask
 from flask import render_template
+from flask import jsonify
+import psycopg2
+
 
 app = Flask(__name__)
 
 
+"""Functions to query tables"""
+def get_employees():
+    """Query data from the employee table"""
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM employee_table")
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    employees=[]
+
+    while row is not None:
+        employees.append(row)
+        row = cur.fetchone()
+
+    cur.close()
+    print (employees)
+    return employees
+
+
+def get_login_details():
+    """Query data from the login table"""
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM login_table")
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    login_detials=[]
+
+    while row is not None:
+        login_detials.append(row)
+        row = cur.fetchone()
+
+    cur.close()
+    print (login_detials)
+    return login_detials
+
+
+def get_stores_names():
+    """Query data from the store table"""
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")
+    cur = conn.cursor()
+    cur.execute("SELECT location_area FROM location_table")
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    store_names_lt=[]
+
+    while row is not None:
+        store_names_lt.append(row)
+        row = cur.fetchone()
+
+    cur.close()
+    store_names = [item for t in store_names_lt for item in t]
+    print (store_names)
+    return store_names
+store_names = get_stores_names()
+
 @app.route('/')
 def home_page():
-    return render_template("Homepage.html")
+    store_names = get_stores_names()
+    return render_template("Homepage.html", store_names=store_names)
 
 
 @app.route('/login')
 def login():
-    return render_template("Login.html")
+    login_detials = get_login_details()
+    return render_template("Login.html", login_detials=login_detials)
 
 
 @app.route('/Manage_Users')

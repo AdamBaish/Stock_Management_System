@@ -43,9 +43,9 @@
             Select a store from the list below
         </button>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/item_search?store=Bournemouth">Bournemouth</a></li>
-            <li><a class="dropdown-item" href="/item_search?store=London">London</a></li>
-            <li><a class="dropdown-item" href="/item_search?store=Manchester">Manchester</a></li>
+            {% for store in store_names %}
+            <li><a class="dropdown-item" href="/item_search?store={{store}}">{{store}}</a></li>
+            {% endfor %}
         </ul>
     </div>
 </div>
@@ -78,6 +78,8 @@
         }
         window.location.href = linkToSearch;
     }
+    var store_names = {{store_names|tojson}};
+    console.log(store_names)
     </script>
 </body>
 </html>
