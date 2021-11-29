@@ -1,8 +1,6 @@
 """
 app.py
 """
-
-
 from re import L
 from flask import Flask
 from flask import render_template
@@ -16,15 +14,15 @@ app = Flask(__name__)
 """Functions to query tables"""
 def get_employees():
     """Query data from the employee table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
-    cur.execute("SELECT * FROM employee_table")
+    cur.execute("SELECT * FROM employee_table")    #executues query 
     print("The number of parts: ", cur.rowcount)
     row = cur.fetchone()
     employees=[]
 
     while row is not None:
-        employees.append(row)
+        employees.append(row)    #appends the employees into a list
         row = cur.fetchone()
 
     cur.close()
@@ -34,15 +32,15 @@ def get_employees():
 
 def get_login_details():
     """Query data from the login table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
-    cur.execute("SELECT * FROM login_table")
+    cur.execute("SELECT * FROM login_table")    #executues query 
     print("The number of parts: ", cur.rowcount)
     row = cur.fetchone()
     login_detials=[]
 
     while row is not None:
-        login_detials.append(row)
+        login_detials.append(row)    #appends the login details into a list
         row = cur.fetchone()
 
     cur.close()
@@ -52,26 +50,26 @@ def get_login_details():
 
 def get_stores_names():
     """Query data from the store table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
-    cur.execute("SELECT location_area FROM location_table")
+    cur.execute("SELECT location_area FROM location_table")    #executues query 
     print("The number of parts: ", cur.rowcount)
     row = cur.fetchone()
     store_names_lt=[]
 
     while row is not None:
-        store_names_lt.append(row)
+        store_names_lt.append(row)    #appends the stores into a list
         row = cur.fetchone()
 
     cur.close()
-    store_names = [item for t in store_names_lt for item in t]
+    store_names = [item for t in store_names_lt for item in t]    #list comprehension to put the data in a usable format
     print (store_names)
     return store_names
 store_names = get_stores_names()
 
 @app.route('/')
 def home_page():
-    store_names = get_stores_names()
+    store_names = get_stores_names()    #returns the list of store names that get passed into Homepage.html
     return render_template("Homepage.html", store_names=store_names)
 
 
