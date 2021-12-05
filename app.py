@@ -5,7 +5,10 @@ from re import L
 from flask import Flask
 from flask import render_template
 from flask import jsonify
+from flask import request, url_for
+
 import psycopg2
+from werkzeug.utils import redirect
 
 
 app = Flask(__name__)
@@ -37,14 +40,15 @@ def get_login_details():
     cur.execute("SELECT * FROM login_table")    #executues query 
     print("The number of parts: ", cur.rowcount)
     row = cur.fetchone()
-    login_detials=[]
+    login_detials_lt=[]
 
     while row is not None:
-        login_detials.append(row)    #appends the login details into a list
+        login_detials_lt.append(row)    #appends the login details into a list
         row = cur.fetchone()
 
     cur.close()
-    print (login_detials)
+    print ("login_detials requested")
+    login_detials = [item for t in login_detials_lt for item in t]    #list comprehension to put the data in a more usable format
     return login_detials
 
 
@@ -62,8 +66,7 @@ def get_stores_names():
         row = cur.fetchone()
 
     cur.close()
-    store_names = [item for t in store_names_lt for item in t]    #list comprehension to put the data in a usable format
-    print (store_names)
+    store_names = [item for t in store_names_lt for item in t]    #list comprehension to put the data in a more usable format
     return store_names
 store_names = get_stores_names()
 
@@ -73,10 +76,32 @@ def home_page():
     return render_template("Homepage.html", store_names=store_names)
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET','POST'])
 def login():
-    login_detials = get_login_details()
-    return render_template("Login.html", login_detials=login_detials)
+    if request.method == "POST":
+        login_detials = get_login_details()    #calls function to return username and password
+
+        #retreive username and password from webpage
+        username = request.form['username']
+        password = request.form['password']
+
+        try:
+            #finds the index of username, and the corrisponding password 
+            username_index = login_detials.index(username)
+            stored_password = login_detials[username_index+1]
+            #checks password
+            if stored_password == password:
+                print("Success")
+            else:
+                return render_template("Login.html")    #the username is correct but the password is not
+        except ValueError:
+            return render_template("Login.html")    #username is not in the database
+
+
+        #redirect user to new page
+        return redirect(url_for("home_page"))
+    else:    #for GET requests
+        return render_template("Login.html")
 
 
 @app.route('/Manage_Users')
