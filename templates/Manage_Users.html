@@ -46,21 +46,85 @@
         <tr>
         <th>User</th>
         <th>Permissions</th>
-        </tr>
-        <tr>
-        <td id="tableTest">test</td>
-        <td><div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-primary btn-lg">
-            <input type="radio" name="options" id="customerSelect" autocomplete="off" checked> Customer
+            <!-- Reading staff list from python-->
+            {% for user in managers %}
+            <tr>
+            <td><a class="">{{user[1] + " " + user[2] + " (ID: " + user[0] + ")"}}
+            <td><div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-primary">
+            <input type="radio" name="options" id="staffSelect" autocomplete="off"> Manager
             </label>
+            <label class="btn btn-primary">
+            <input type="radio" name="options" id="managerSelect" autocomplete="off"> Staff
+            </label>
+            <label class="btn btn-primary">
+            <input type="radio" name="options" id="customerSelect" autocomplete="off"> Customer
+            </label>
+            <label class="btn btn-primary">
+            <button button class="btn btn-primary" id="saveButton" >Save Changes</button>
+            </label>
+            </div>
+            </td>
+            </a>
+            </td>
+            </tr>
+            {% endfor %}
+            <!-- Reading staff list from python-->
+            {% for user in employees %}
+            <tr>
+            <td><a class="">{{user[1] + " " + user[2] + " (ID: " + user[0] + ")"}}
+            <td><div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-primary">
+            <input type="radio" name="options" id="staffSelect" autocomplete="off"> Manager
+            </label>
+            <label class="btn btn-primary">
+            <input type="radio" name="options" id="managerSelect" autocomplete="off"> Staff
+            </label>
+            <label class="btn btn-primary">
+            <input type="radio" name="options" id="customerSelect" autocomplete="off"> Customer
+            </label>
+            <label class="btn btn-primary">
+            <button button class="btn btn-primary" id="saveButton" >Save Changes</button>
+            </label>
+            </div>
+            </td>
+            </a>
+            </td>
+            </tr>
+            {% endfor %}
+            <!-- Reading staff list from python-->
+            {% for user in customers %}
+            <tr>
+            <td><a class="">{{user[1] + " " + user[2] + " (ID: " + user[0] + ")"}}
+            <td><div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-primary">
+            <input type="radio" name="options" id="staffSelect" autocomplete="off"> Manager
+            </label>
+            <label class="btn btn-primary">
+            <input type="radio" name="options" id="managerSelect" autocomplete="off"> Staff
+            </label>
+            <label class="btn btn-primary">
+            <input type="radio" name="options" id="customerSelect" autocomplete="off"> Customer
+            </label>
+            <label class="btn btn-primary">
+            <button button class="btn btn-primary" id="saveButton" >Save Changes</button>
+            </label>
+            </div>
+            </td>
+            </a>
+            </td>
+            </tr>
+            {% endfor %}
+        </td>
+        <!--<td><div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-primary btn-lg">
             <input type="radio" name="options" id="staffSelect" autocomplete="off"> Staff
             </label>
             <label class="btn btn-primary btn-lg">
-            <input type="radio" name="options" id="managerSelect" autocomplete="off"> Employee
+            <input type="radio" name="options" id="managerSelect" autocomplete="off"> Manager
             </label>
-            </div>  
-            </td>
+            </div>
+            </td>-->
         </tr>
     </table> 
 </div>
@@ -93,6 +157,12 @@
         }
         window.location.href = linkToSearch;
     }
+
+    /*
+    function popTable(){
+        WIP
+    }
+    */
     </script>
 </body>
 </html>
