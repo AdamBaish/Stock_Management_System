@@ -17,7 +17,7 @@ app = Flask(__name__)
 """Functions to query tables"""
 def get_employees():
     """Query data from the employee table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=!password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
     cur.execute("SELECT * FROM employee_table")    #executues query
     print("The number of parts: ", cur.rowcount)
@@ -34,7 +34,7 @@ def get_employees():
 
 def get_managers():
     """Query data from the manager table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=!password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
     cur.execute("SELECT * FROM manager_table")    #executues query
     print("The number of parts: ", cur.rowcount)
@@ -51,7 +51,7 @@ def get_managers():
 
 def get_customers():
     """Query data from the customer table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=!password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
     cur.execute("SELECT * FROM customer_table")    #executues query
     print("The number of parts: ", cur.rowcount)
@@ -68,7 +68,7 @@ def get_customers():
 
 def get_login_details():
     """Query data from the login table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=!password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
     cur.execute("SELECT * FROM login_table")    #executues query 
     print("The number of parts: ", cur.rowcount)
@@ -87,7 +87,7 @@ def get_login_details():
 
 def get_stores_names():
     """Query data from the store table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=!password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
     cur.execute("SELECT location_area FROM location_table")    #executues query 
     print("The number of parts: ", cur.rowcount)
