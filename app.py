@@ -89,6 +89,30 @@ def get_stores_names():
     return store_names
 store_names = get_stores_names()
 
+
+def get_items(search, store):
+    """Query data from the store table"""
+    search = " '" + search + "';"
+    store = " '" + store + "' "
+    print(search + store)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    query = "SELECT product_name, product_price, product_quantity FROM store_table, product_table, store_product_link WHERE store_product_link.fk_store_id = store_table.store_id AND product_table.product_id = store_product_link.fk_product_id AND product_name =" + search
+    print (query)
+    cur.execute(query)    #executues query 
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    products=[]
+
+    while row is not None:
+        products.append(row)    #appends the stores into a list
+        row = cur.fetchone()
+
+    cur.close()
+    products = [item for t in products for item in t]    #list comprehension to put the data in a more usable format
+    return products
+
+
 @app.route('/')
 def home_page():
     store_names = get_stores_names()    #returns the list of store names that get passed into Homepage.html
@@ -135,8 +159,12 @@ def item_search():
 
 @app.route('/search_results')
 def search_results():
-    return render_template("search_results.html")
-    
+    search = request.args.get('search')
+    store = request.args.get('store')
+    items = get_items(search, store)
+    print (items)
+    return render_template("search_results.html",items=items)
+
 
 if __name__ == '__main__':
     app.run()
