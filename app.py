@@ -33,6 +33,42 @@ def get_employees():
     return employees
 
 
+def get_managers():
+    """Query data from the employee table"""
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM employee_table")    #executues query 
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    managers=[]
+
+    while row is not None:
+        managers.append(row)    #appends the managers into a list
+        row = cur.fetchone()
+
+    cur.close()
+    print (managers)
+    return managers
+
+
+def get_customers():
+    """Query data from the employee table"""
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM employee_table")    #executues query 
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    customers=[]
+
+    while row is not None:
+        customers.append(row)    #appends the customers into a list
+        row = cur.fetchone()
+
+    cur.close()
+    print (customers)
+    return customers
+
+
 def get_login_details():
     """Query data from the login table"""
     conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
@@ -173,8 +209,11 @@ def login():
 
 
 @app.route('/Manage_Users')
-def manage_users():
-    return render_template("Manage_Users.html")
+def manage_users():    
+    user_list = get_employees()
+    manager_list = get_managers()
+    customer_list = get_customers()
+    return render_template("Manage_Users.html", employees = user_list, managers = manager_list, customers = customer_list)
 
 
 @app.route('/item_search')
