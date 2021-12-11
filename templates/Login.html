@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -9,7 +10,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Stock Management System</title>
     <!--Navigation bar-->
@@ -36,74 +37,77 @@
     </nav>
     <!--Navigation bar-->
 </head>
+
 <body>
-    <div class="p-5"></div>  
-        <div class="container">
-            <form action="#" method="post" class="form-signin" id="LoginDetails">
+    <div class="p-5"></div>
+    <div class="container">
+        <form action="#" method="post" class="form-signin" id="LoginDetails">
             <h2 class="form-signin-heading">Staff Log-In</h2>
             <label for="username" class="sr-only">Username</label>
-            <input type="username" name="username" id="username" class="form-control" placeholder="Username" required autofocus>
+            <input type="username" name="username" id="username" class="form-control" placeholder="Username" required
+                autofocus>
             <div class="pt-2">
-            <label for="password" class="sr-only">Password</label>
+                <label for="password" class="sr-only">Password</label>
             </div>
             <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
             <div class="pt-2">
                 <p class="text-danger" id="showAlert" style="display: none;">Incorrect username or password.</p>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>        
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
             </div>
-            </form>
+        </form>
 
-        </div>
+    </div>
     </div>
 
-<!-- Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-<script>
-    //These functions should be in every page so that the search bar works
-    function getParameterByName(name, url = window.location.href) {
-        //Function to get specific parameters from the URL
-        name = name.replace(/[\[\]]/g, '\\$&');
-        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
-    
-    function navSearch(){
-        //Function to allow the usage of the search bar in the top right
-        var toSearch = document.getElementById("navSearchBar").value;
-        var store = getParameterByName('store');
-        if (store != ""){
-            var linkToSearch =  "/search_results?search=" + toSearch + "&store=" + store;
-        }else{
-            var linkToSearch =  "/search_results?search=" + toSearch;
+    <script>
+        //These functions should be in every page so that the search bar works
+        function getParameterByName(name, url = window.location.href) {
+            //Function to get specific parameters from the URL
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
         }
-        window.location.href = linkToSearch;
-    }
 
-    function logIn(){
-        var username = document.getElementById("username");
-        var password = document.getElementById('password');
-    }
+        function navSearch() {
+            //Function to allow the usage of the search bar in the top right
+            var toSearch = document.getElementById("navSearchBar").value;
+            var store = getParameterByName('store');
+            if (store != "") {
+                var linkToSearch = "/search_results?search=" + toSearch + "&store=" + store;
+            } else {
+                var linkToSearch = "/search_results?search=" + toSearch;
+            }
+            window.location.href = linkToSearch;
+        }
 
-    function checkError(){
-        tocheck={{error|tojson}};
+        function logIn() {
+            var username = document.getElementById("username");
+            var password = document.getElementById('password');
+        }
+
+        function checkError() {
+            tocheck = {{ error | tojson }};
         showAlert = document.getElementById("showAlert");
         console.log(tocheck);
-        if (tocheck == "error"){
+        if (tocheck == "error") {
             showAlert.style.display = "block";
-        }else{
+        } else {
             showAlert.style.display = "none";
         }
-    }
+        }
 
-    window.onload = function(){
-        checkError();
-    }
+        window.onload = function () {
+            checkError();
+        }
     </script>
 </body>
+
 </html>

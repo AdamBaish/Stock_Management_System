@@ -103,6 +103,55 @@ def get_stores_names():
     return store_names
 store_names = get_stores_names()
 
+
+def get_items_from_search(search, store):
+    """Query data from the store table"""
+    search = " '" + search + "';"
+    store = " '" + store + "' "
+    print(search + store)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    query = "SELECT product_name, product_price, product_quantity FROM store_table, product_table, store_product_link WHERE store_product_link.fk_store_id = store_table.store_id AND product_table.product_id = store_product_link.fk_product_id AND product_name =" + search
+    cur.execute(query)    #executues query 
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    products=[]
+
+    while row is not None:
+        products.append(row)    #appends the stores into a list
+        row = cur.fetchone()
+
+    cur.close()
+    products = [item for t in products for item in t]    #list comprehension to put the data in a more usable format
+    return products
+
+
+def get_items_by_store(store):
+    """Query data from the store table"""
+    #Match the store name to the store ID's
+    store_list=["Bournemouth", "London", "Manchester", "Bristol", "York"]
+    store_ids=["STR01", "STR02", "STR03", "STR04", "STR05"]
+    index = store_list.index(store)
+    id = store_ids[index] 
+
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    query = "SELECT product_name FROM product_table, location_table, store_table, store_product_link, store_location_link WHERE product_table.product_id = store_product_link.fk_product_id AND store_table.store_id = store_product_link.fk_store_id AND store_id IN ('"+ id +"') AND location_table.location_id = store_location_link.fk_location_id AND location_area IN ('"+ store +"')"
+    print (query)
+    cur.execute(query)    #executues query 
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    products=[]
+
+    while row is not None:
+        products.append(row)    #appends the stores into a list
+        row = cur.fetchone()
+
+    cur.close()
+    products = [item for t in products for item in t]    #list comprehension to put the data in a more usable format
+    return products
+
+
 @app.route('/')
 def home_page():
     store_names = get_stores_names()    #returns the list of store names that get passed into Homepage.html
@@ -147,13 +196,22 @@ def manage_users():
 
 @app.route('/item_search')
 def item_search():
-    return render_template("item_search.html")
+    store = request.args.get('store')
+    products = get_items_by_store(store)
+    print(products)
+    return render_template("item_search.html", products=products)
 
 
 @app.route('/search_results')
 def search_results():
-    return render_template("search_results.html")
-    
+    #Retreives the variables from the URL
+    search = request.args.get('search')
+    store = request.args.get('store')
+    #Calls the search function
+    items = get_items_from_search(search, store)
+    print (items)
+    return render_template("search_results.html",items=items)
+
 
 if __name__ == '__main__':
     app.run()
