@@ -85,6 +85,11 @@
             }
             window.location.href = linkToSearch;
         }
+
+        var login = {{login|tojson}};
+        if (login == "Success"){
+            alert("You are successfully logged in");
+        }
     </script>
 </body>
 

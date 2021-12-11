@@ -177,7 +177,7 @@ def get_items_by_store(store):
 @app.route('/')
 def home_page():
     store_names = get_stores_names()    #returns the list of store names that get passed into Homepage.html
-    return render_template("Homepage.html", store_names=store_names)
+    return render_template("Homepage.html", store_names=store_names, login="False")
 
 
 @app.route('/login', methods=['GET','POST'])
@@ -203,7 +203,8 @@ def login():
 
 
         #redirect user to new page
-        return redirect(url_for("home_page"))
+        store_names = get_stores_names()    #returns the list of store names that get passed into Homepage.html
+        return render_template("Homepage.html", store_names=store_names,login="Success")
     else:    #for GET requests
         return render_template("Login.html", error="none")
 
