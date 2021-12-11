@@ -94,8 +94,7 @@
         }
 
         function checkError() {
-            tocheck = {{ error | tojson }
-        };
+            tocheck = {{ error | tojson }};
         showAlert = document.getElementById("showAlert");
         console.log(tocheck);
         if (tocheck == "error") {
@@ -103,7 +102,7 @@
         } else {
             showAlert.style.display = "none";
         }
-    }
+        }
 
         window.onload = function () {
             checkError();
