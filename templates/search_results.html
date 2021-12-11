@@ -93,16 +93,17 @@
         }
 
         function myFunction() {
-            items = {{ items | tojson }}
-            console.log(items)
-            var table = document.getElementById("productTable");
-            var row = table.insertRow(1);
-            var product = row.insertCell(0);
-            var quantity = row.insertCell(1);
-            var price = row.insertCell(2);
-            product.innerHTML = items[0];
-            quantity.innerHTML = items[1];
-            price.innerHTML = items[2];
+            items = {{ items | tojson }
+        }
+        console.log(items)
+        var table = document.getElementById("productTable");
+        var row = table.insertRow(1);
+        var product = row.insertCell(0);
+        var quantity = row.insertCell(1);
+        var price = row.insertCell(2);
+        product.innerHTML = items[0];
+        quantity.innerHTML = items[1];
+        price.innerHTML = items[2];
             }
 
         onLoad();
