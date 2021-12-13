@@ -119,6 +119,24 @@ def get_login_details():
     login_detials = [item for t in login_detials_lt for item in t]    #list comprehension to put the data in a more usable format
     return login_detials
 
+def get_permissons(username):
+    """Query data from the login table"""
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    cur.execute("SELECT " +username+" FROM login_employee_link, login_customer_link, login_manager_link")    #executues query 
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    permission=[]
+
+    while row is not None:
+        permission.append(row)    #appends the login details into a list
+        row = cur.fetchone()
+
+    cur.close()
+    print ("permission requested")
+    #login_detials = [item for t in login_detials_lt for item in t]    #list comprehension to put the data in a more usable format
+    return permission
+
 
 def get_stores_names():
     """Query data from the store table"""
@@ -191,7 +209,7 @@ def get_items_by_store(store):
 @app.route('/')
 def home_page():
     store_names = get_stores_names()    #returns the list of store names that get passed into Homepage.html
-    return render_template("Homepage.html", store_names=store_names)
+    return render_template("Homepage.html", store_names=store_names, login="False")
 
 
 @app.route('/login', methods=['GET','POST'])
@@ -202,6 +220,7 @@ def login():
         #retreive username and password from webpage
         username = request.form['username']
         password = request.form['password']
+        error = "none"
 
         try:
             #finds the index of username, and the corrisponding password
@@ -211,15 +230,16 @@ def login():
             if stored_password == password:
                 print("Success")
             else:
-                return render_template("Login.html")    #the username is correct but the password is not
+                return render_template("Login.html", error="error")    #the username is correct but the password is not
         except ValueError:
-            return render_template("Login.html")    #username is not in the database
+            return render_template("Login.html", error="error")    #username is not in the database
 
 
         #redirect user to new page
-        return redirect(url_for("home_page"))
+        store_names = get_stores_names()    #returns the list of store names that get passed into Homepage.html
+        return render_template("Homepage.html", store_names=store_names,login="Success")
     else:    #for GET requests
-        return render_template("Login.html")
+        return render_template("Login.html", error="none")
 
 
 @app.route('/Manage_Users')
