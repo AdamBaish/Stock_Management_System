@@ -266,7 +266,7 @@ INSERT INTO manager_table VALUES ('M01', 'Adam', 'Baish');
 INSERT INTO manager_table VALUES ('M02', 'Cieran', 'Nolan');
 INSERT INTO manager_table VALUES ('M03', 'Max', 'Bosiakov');
 INSERT INTO manager_table VALUES ('M04', 'Sam', 'Johnson');
-INSERT INTO manager_table VALUES ('M05', 'Suzy', 'Manager Last Name');
+INSERT INTO manager_table VALUES ('M05', 'Suzy', 'Atfield-Cutts');
 
 --Employee Table Inserts
 INSERT INTO employee_table VALUES ('E01', 'Alan', 'Bran');
