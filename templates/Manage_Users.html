@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -12,7 +11,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <title>Stock Management System</title>
     <!--Navigation bar-->
@@ -39,31 +38,38 @@
     </nav>
     <!--Navigation bar-->
 </head>
-
 <body>
-    <h1 class="pt-2 text-center">Manage Users</h1>
+<h1 class="pt-2 text-center">Manage Users</h1>
 
-<div>
-    <table class="table text-center"> 
+<div id="manageAccount">
+    <table class="table text-center">
         <tr>
         <th>User</th>
         <th>Permissions</th>
-            <!-- Reading staff list from python-->
-            {% for user in managers %}
+
+            <!-- Reading managers, staff and customer list from python-->
+            {% for user in users %}
             <tr>
-            <td><a class="">{{user[1] + " " + user[2] + " (ID: " + user[0] + ")"}}
+            <td><a>{{user[1] + " " + user[2] + " (ID: " + user[0] + ")"}}
+            {% if "M" in user[0]%}
+            {% set manager = "checked" %}
+            {% elif "E" in user[0]%}
+            {% set employee = "checked" %}
+            {% else %}
+            {% set customer = "checked" %}
+            {%  endif %}
             <td><div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-primary">
-            <input type="radio" name="options" id="staffSelect" autocomplete="off"> Manager
+            <input type="radio" name="{{user[0]}}" id="managerSelect{{user[0]}}" autocomplete="off" {{manager}}> Manager
             </label>
             <label class="btn btn-primary">
-            <input type="radio" name="options" id="managerSelect" autocomplete="off"> Staff
+            <input type="radio" name="{{user[0]}}" id="employeeSelect{{user[0]}}" autocomplete="off" {{employee}}> Staff
             </label>
             <label class="btn btn-primary">
-            <input type="radio" name="options" id="customerSelect" autocomplete="off"> Customer
+            <input type="radio" name="{{user[0]}}" id="customerSelect{{user[0]}}" autocomplete="off" {{customer}}> Customer
             </label>
             <label class="btn btn-primary">
-            <button button class="btn btn-primary" id="saveButton" >Save Changes</button>
+            <button button class="btn btn-primary" id="saveButton{{user[0]}}" >Save Changes</button>
             </label>
             </div>
             </td>
@@ -71,103 +77,18 @@
             </td>
             </tr>
             {% endfor %}
-            <!-- Reading staff list from python-->
-            {% for user in employees %}
-            <tr>
-            <td><a class="">{{user[1] + " " + user[2] + " (ID: " + user[0] + ")"}}
-            <td><div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-primary">
-            <input type="radio" name="options" id="staffSelect" autocomplete="off"> Manager
-            </label>
-            <label class="btn btn-primary">
-            <input type="radio" name="options" id="managerSelect" autocomplete="off"> Staff
-            </label>
-            <label class="btn btn-primary">
-            <input type="radio" name="options" id="customerSelect" autocomplete="off"> Customer
-            </label>
-            <label class="btn btn-primary">
-            <button button class="btn btn-primary" id="saveButton" >Save Changes</button>
-            </label>
-            </div>
-            </td>
-            </a>
-            </td>
-            </tr>
-            {% endfor %}
-            <!-- Reading staff list from python-->
-            {% for user in customers %}
-            <tr>
-            <td><a class="">{{user[1] + " " + user[2] + " (ID: " + user[0] + ")"}}
-            <td><div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-primary">
-            <input type="radio" name="options" id="staffSelect" autocomplete="off"> Manager
-            </label>
-            <label class="btn btn-primary">
-            <input type="radio" name="options" id="managerSelect" autocomplete="off"> Staff
-            </label>
-            <label class="btn btn-primary">
-            <input type="radio" name="options" id="customerSelect" autocomplete="off"> Customer
-            </label>
-            <label class="btn btn-primary">
-            <button button class="btn btn-primary" id="saveButton" >Save Changes</button>
-            </label>
-            </div>
-            </td>
-            </a>
-            </td>
-            </tr>
-            {% endfor %}
+
         </td>
-        <!--<td><div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-primary btn-lg">
-            <input type="radio" name="options" id="staffSelect" autocomplete="off"> Staff
-            </label>
-            <label class="btn btn-primary btn-lg">
-            <input type="radio" name="options" id="managerSelect" autocomplete="off"> Manager
-            </label>
-            </div>
-            </td>-->
         </tr>
-    </table> 
+    </table>
 </div>
 
-
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-    <script>
-        //These functions should be in every page so that the search bar works
-        function getParameterByName(name, url = window.location.href) {
-            //Function to get specific parameters from the URL
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
+<script src="static/manage_users.js"> </script>
 
-        function navSearch() {
-            //Function to allow the usage of the search bar in the top right
-            var toSearch = document.getElementById("navSearchBar").value;
-            var store = getParameterByName('store');
-            if (store != "") {
-                var linkToSearch = "/search_results?search=" + toSearch + "&store=" + store;
-            } else {
-                var linkToSearch = "/search_results?search=" + toSearch;
-            }
-            window.location.href = linkToSearch;
-        }
-        window.location.href = linkToSearch;
-
-    /*
-    function popTable(){
-        WIP
-    }
-    */
-    </script>
 </body>
-
 </html>
