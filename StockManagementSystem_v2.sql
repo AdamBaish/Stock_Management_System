@@ -1,4 +1,4 @@
---DROP TABLE employee_manager_link;
+DROP TABLE employee_manager_link;
 DROP TABLE login_customer_link;
 DROP TABLE login_employee_link;
 DROP TABLE login_manager_link;
@@ -145,14 +145,14 @@ CREATE TABLE login_customer_link
 	FOREIGN KEY (fk_customer_id) REFERENCES customer_table(customer_id)
 );
 
---CREATE TABLE employee_manager_link
---(
---	fk_employee_id VARCHAR(8),
---	fk_manager_id VARCHAR(8),
---	PRIMARY KEY (fk_employee_id, fk_manager_id),
---	FOREIGN KEY (fk_employee_id) REFERENCES employee_table(employee_id),
---	FOREIGN KEY (fk_manager_id) REFERENCES manager_table(manager_id)
---);
+CREATE TABLE employee_manager_link
+(
+	fk_employee_id VARCHAR(8),
+	fk_manager_id VARCHAR(8),
+	PRIMARY KEY (fk_employee_id, fk_manager_id),
+	FOREIGN KEY (fk_employee_id) REFERENCES employee_table(employee_id),
+	FOREIGN KEY (fk_manager_id) REFERENCES manager_table(manager_id)
+);
 
 
 COMMIT;
@@ -385,11 +385,11 @@ INSERT INTO login_customer_link VALUES ('adamjansen@outlook.com', 'C09');
 INSERT INTO login_customer_link VALUES ('silco68@protonmail.com', 'C10');
 
 --Employee Table and Manager Table Link
---INSERT INTO employee_manager_link VALUES ('E01', 'M01');
---INSERT INTO employee_manager_link VALUES ('E02', 'M02');
---INSERT INTO employee_manager_link VALUES ('E03', 'M03');
---INSERT INTO employee_manager_link VALUES ('E04', 'M04');
---INSERT INTO employee_manager_link VALUES ('E05', 'M05');
+INSERT INTO employee_manager_link VALUES ('E01', 'M01');
+INSERT INTO employee_manager_link VALUES ('E02', 'M02');
+INSERT INTO employee_manager_link VALUES ('E03', 'M03');
+INSERT INTO employee_manager_link VALUES ('E04', 'M04');
+INSERT INTO employee_manager_link VALUES ('E05', 'M05');
 
 COMMIT;
 
