@@ -211,20 +211,20 @@ INSERT INTO product_table VALUES ('PID38', 'Ceiling Light', 65.00, 11, 'Lorem Ip
 INSERT INTO product_table VALUES ('PID39', 'Bedside Lamp', 32.00, 33, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
 INSERT INTO product_table VALUES ('PID40', 'Wallmounted Light', 52.49, 7, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
 INSERT INTO product_table VALUES ('PID41', 'Outdoor Light', 89.99, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
-INSERT INTO product_table VALUES ('PID41', 'Chandelier', 129.99, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
-INSERT INTO product_table VALUES ('PID41', 'Security Lights', 65.99, 8, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
-INSERT INTO product_table VALUES ('PID41', 'Christmas Lights', 75.99, 20, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+INSERT INTO product_table VALUES ('PID42', 'Chandelier', 129.99, 2, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+INSERT INTO product_table VALUES ('PID43', 'Security Lights', 65.99, 8, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+INSERT INTO product_table VALUES ('PID44', 'Christmas Lights', 75.99, 20, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
 
-INSERT INTO product_table VALUES ('PID42', 'Birthday Card', 3.29, 129, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
-INSERT INTO product_table VALUES ('PID43', 'Christmas Card', 3.29, 66, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
-INSERT INTO product_table VALUES ('PID44', 'Congratulations Card', 1.99, 22, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
-INSERT INTO product_table VALUES ('PID45', 'Condolences Card', 1.99, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
-INSERT INTO product_table VALUES ('PID46', 'Greetings Card', 1.99, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
-INSERT INTO product_table VALUES ('PID47', 'Anniversary Card', 1.99, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
-INSERT INTO product_table VALUES ('PID48', 'Flower Card', 1.99, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
-INSERT INTO product_table VALUES ('PID49', 'Toy Bear Card', 1.99, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
-INSERT INTO product_table VALUES ('PID50', 'Cat Card', 1.99, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
-INSERT INTO product_table VALUES ('PID51', 'Dog Card', 1.99, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+INSERT INTO product_table VALUES ('PID45', 'Birthday Card', 3.29, 129, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+INSERT INTO product_table VALUES ('PID46', 'Christmas Card', 3.29, 66, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+INSERT INTO product_table VALUES ('PID47', 'Congratulations Card', 1.99, 22, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+INSERT INTO product_table VALUES ('PID48', 'Condolences Card', 1.99, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+INSERT INTO product_table VALUES ('PID49', 'Greetings Card', 1.99, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+INSERT INTO product_table VALUES ('PID50', 'Anniversary Card', 1.99, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+INSERT INTO product_table VALUES ('PID51', 'Flower Card', 1.99, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+INSERT INTO product_table VALUES ('PID52', 'Toy Bear Card', 1.99, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+INSERT INTO product_table VALUES ('PID53', 'Cat Card', 1.99, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+INSERT INTO product_table VALUES ('PID54', 'Dog Card', 1.99, 16, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
 
 --Location Table Inserts
 INSERT INTO location_table VALUES ('L01', 'Bournemouth', '102 Blaine Road', 'BH1 3AA');
@@ -297,22 +297,60 @@ INSERT INTO store_product_link VALUES ('STR01', 'PID01');
 INSERT INTO store_product_link VALUES ('STR01', 'PID02');
 INSERT INTO store_product_link VALUES ('STR01', 'PID03');
 INSERT INTO store_product_link VALUES ('STR01', 'PID04');
-INSERT INTO store_product_link VALUES ('STR02', 'PID05');
-INSERT INTO store_product_link VALUES ('STR02', 'PID06');
-INSERT INTO store_product_link VALUES ('STR02', 'PID07');
-INSERT INTO store_product_link VALUES ('STR02', 'PID08');
-INSERT INTO store_product_link VALUES ('STR03', 'PID09');
-INSERT INTO store_product_link VALUES ('STR03', 'PID10');
-INSERT INTO store_product_link VALUES ('STR03', 'PID11');
-INSERT INTO store_product_link VALUES ('STR03', 'PID12');
-INSERT INTO store_product_link VALUES ('STR04', 'PID13');
-INSERT INTO store_product_link VALUES ('STR04', 'PID14');
-INSERT INTO store_product_link VALUES ('STR04', 'PID15');
-INSERT INTO store_product_link VALUES ('STR04', 'PID16');
-INSERT INTO store_product_link VALUES ('STR05', 'PID17');
-INSERT INTO store_product_link VALUES ('STR05', 'PID18');
-INSERT INTO store_product_link VALUES ('STR05', 'PID19');
-INSERT INTO store_product_link VALUES ('STR05', 'PID20');
+INSERT INTO store_product_link VALUES ('STR01', 'PID05');
+INSERT INTO store_product_link VALUES ('STR01', 'PID06');
+INSERT INTO store_product_link VALUES ('STR01', 'PID07');
+INSERT INTO store_product_link VALUES ('STR01', 'PID08');
+
+INSERT INTO store_product_link VALUES ('STR02', 'PID09');
+INSERT INTO store_product_link VALUES ('STR02', 'PID10');
+INSERT INTO store_product_link VALUES ('STR02', 'PID11');
+INSERT INTO store_product_link VALUES ('STR02', 'PID12');
+INSERT INTO store_product_link VALUES ('STR02', 'PID13');
+INSERT INTO store_product_link VALUES ('STR02', 'PID14');
+INSERT INTO store_product_link VALUES ('STR02', 'PID15');
+INSERT INTO store_product_link VALUES ('STR02', 'PID16');
+INSERT INTO store_product_link VALUES ('STR02', 'PID17');
+INSERT INTO store_product_link VALUES ('STR02', 'PID18');
+INSERT INTO store_product_link VALUES ('STR02', 'PID19');
+INSERT INTO store_product_link VALUES ('STR02', 'PID20');
+INSERT INTO store_product_link VALUES ('STR02', 'PID21');
+INSERT INTO store_product_link VALUES ('STR02', 'PID22');
+INSERT INTO store_product_link VALUES ('STR02', 'PID23');
+INSERT INTO store_product_link VALUES ('STR02', 'PID24');
+INSERT INTO store_product_link VALUES ('STR02', 'PID25');
+INSERT INTO store_product_link VALUES ('STR02', 'PID27');
+INSERT INTO store_product_link VALUES ('STR02', 'PID28');
+
+INSERT INTO store_product_link VALUES ('STR03', 'PID29');
+INSERT INTO store_product_link VALUES ('STR03', 'PID30');
+INSERT INTO store_product_link VALUES ('STR03', 'PID31');
+INSERT INTO store_product_link VALUES ('STR03', 'PID32');
+INSERT INTO store_product_link VALUES ('STR03', 'PID33');
+INSERT INTO store_product_link VALUES ('STR03', 'PID34');
+INSERT INTO store_product_link VALUES ('STR03', 'PID35');
+INSERT INTO store_product_link VALUES ('STR03', 'PID36');
+INSERT INTO store_product_link VALUES ('STR03', 'PID37');
+
+INSERT INTO store_product_link VALUES ('STR04', 'PID38');
+INSERT INTO store_product_link VALUES ('STR04', 'PID39');
+INSERT INTO store_product_link VALUES ('STR04', 'PID40');
+INSERT INTO store_product_link VALUES ('STR04', 'PID41');
+INSERT INTO store_product_link VALUES ('STR04', 'PID42');
+INSERT INTO store_product_link VALUES ('STR04', 'PID43');
+INSERT INTO store_product_link VALUES ('STR04', 'PID44');
+
+INSERT INTO store_product_link VALUES ('STR05', 'PID45');
+INSERT INTO store_product_link VALUES ('STR05', 'PID46');
+INSERT INTO store_product_link VALUES ('STR05', 'PID47');
+INSERT INTO store_product_link VALUES ('STR05', 'PID48');
+INSERT INTO store_product_link VALUES ('STR05', 'PID49');
+INSERT INTO store_product_link VALUES ('STR05', 'PID50');
+INSERT INTO store_product_link VALUES ('STR05', 'PID51');
+INSERT INTO store_product_link VALUES ('STR05', 'PID52');
+INSERT INTO store_product_link VALUES ('STR05', 'PID53');
+INSERT INTO store_product_link VALUES ('STR05', 'PID54');
+
 
 --Store Table and Location Table Link
 INSERT INTO store_location_link VALUES ('STR01', 'L01');
