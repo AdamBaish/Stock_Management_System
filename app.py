@@ -1,38 +1,240 @@
 """
 app.py
 """
-
-
+from re import L
 from flask import Flask
 from flask import render_template
+from flask import jsonify
+from flask import request, url_for
+
+import psycopg2
+from werkzeug.utils import redirect
+
 
 app = Flask(__name__)
 
 
+"""Functions to query tables"""
+def get_employees():
+    """Query data from the employee table"""
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM employee_table")    #executues query 
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    employees=[]
+
+    while row is not None:
+        employees.append(row)    #appends the employees into a list
+        row = cur.fetchone()
+
+    cur.close()
+    print (employees)
+    return employees
+
+
+def get_managers():
+    """Query data from the employee table"""
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM employee_table")    #executues query 
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    managers=[]
+
+    while row is not None:
+        managers.append(row)    #appends the managers into a list
+        row = cur.fetchone()
+
+    cur.close()
+    print (managers)
+    return managers
+
+
+def get_customers():
+    """Query data from the employee table"""
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM employee_table")    #executues query 
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    customers=[]
+
+    while row is not None:
+        customers.append(row)    #appends the customers into a list
+        row = cur.fetchone()
+
+    cur.close()
+    print (customers)
+    return customers
+
+
+def get_login_details():
+    """Query data from the login table"""
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM login_table")    #executues query 
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    login_detials_lt=[]
+
+    while row is not None:
+        login_detials_lt.append(row)    #appends the login details into a list
+        row = cur.fetchone()
+
+    cur.close()
+    print ("login_detials requested")
+    login_detials = [item for t in login_detials_lt for item in t]    #list comprehension to put the data in a more usable format
+    return login_detials
+
+
+def get_permissons(username):
+    """Query data from the login table"""
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    cur.execute("SELECT " +username+" FROM login_employee_link, login_customer_link, login_manager_link")    #executues query 
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    permission=[]
+
+    while row is not None:
+        permission.append(row)    #appends the login details into a list
+        row = cur.fetchone()
+
+    cur.close()
+    print ("permission requested")
+    #login_detials = [item for t in login_detials_lt for item in t]    #list comprehension to put the data in a more usable format
+    return permission
+
+
+def get_stores_names():
+    """Query data from the store table"""
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    cur.execute("SELECT location_area FROM location_table")    #executues query 
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    store_names_lt=[]
+
+    while row is not None:
+        store_names_lt.append(row)    #appends the stores into a list
+        row = cur.fetchone()
+
+    cur.close()
+    store_names = [item for t in store_names_lt for item in t]    #list comprehension to put the data in a more usable format
+    return store_names
+store_names = get_stores_names()
+
+
+def get_items_from_search(search, store):
+    """Query data from the store table"""
+    search = " '" + search + "';"
+    store = " '" + store + "' "
+    print(search + store)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    query = "SELECT product_name, product_price, product_quantity, product_description, store_name FROM store_table, product_table, store_product_link WHERE store_product_link.fk_store_id = store_table.store_id AND product_table.product_id = store_product_link.fk_product_id AND product_name =" + search
+    cur.execute(query)    #executues query 
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    products=[]
+
+    while row is not None:
+        products.append(row)    #appends the stores into a list
+        row = cur.fetchone()
+
+    cur.close()
+    products = [item for t in products for item in t]    #list comprehension to put the data in a more usable format
+    return products
+
+
+def get_items_by_store(store):
+    """Query data from the store table"""
+    #Match the store name to the store ID's
+    store_list=["Bournemouth", "London", "Manchester", "Bristol", "York"]
+    store_ids=["STR01", "STR02", "STR03", "STR04", "STR05"]
+    index = store_list.index(store)
+    id = store_ids[index] 
+
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    query = "SELECT product_name FROM product_table, location_table, store_table, store_product_link, store_location_link WHERE product_table.product_id = store_product_link.fk_product_id AND store_table.store_id = store_product_link.fk_store_id AND store_id IN ('"+ id +"') AND location_table.location_id = store_location_link.fk_location_id AND location_area IN ('"+ store +"')"
+    print (query)
+    cur.execute(query)    #executues query 
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    products=[]
+
+    while row is not None:
+        products.append(row)    #appends the stores into a list
+        row = cur.fetchone()
+
+    cur.close()
+    products = [item for t in products for item in t]    #list comprehension to put the data in a more usable format
+    return products
+
+
 @app.route('/')
 def home_page():
-    return render_template("Homepage.html")
+    store_names = get_stores_names()    #returns the list of store names that get passed into Homepage.html
+    return render_template("Homepage.html", store_names=store_names, login="False")
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET','POST'])
 def login():
-    return render_template("Login.html")
+    if request.method == "POST":
+        login_detials = get_login_details()    #calls function to return username and password
+
+        #retreive username and password from webpage
+        username = request.form['username']
+        password = request.form['password']
+        error="none"
+        try:
+            #finds the index of username, and the corrisponding password 
+            username_index = login_detials.index(username)
+            stored_password = login_detials[username_index+1]
+            #checks password
+            if stored_password == password:
+                print("Success")
+            else:
+                return render_template("Login.html", error="error")    #the username is correct but the password is not
+        except ValueError:
+            return render_template("Login.html", error="error")    #username is not in the database
+
+
+        #redirect user to new page
+        store_names = get_stores_names()    #returns the list of store names that get passed into Homepage.html
+        return render_template("Homepage.html", store_names=store_names,login="Success")
+    else:    #for GET requests
+        return render_template("Login.html", error="none")
 
 
 @app.route('/Manage_Users')
-def manage_users():
-    return render_template("Manage_Users.html")
+def manage_users():    
+    user_list = get_employees()
+    manager_list = get_managers()
+    customer_list = get_customers()
+    return render_template("Manage_Users.html", employees = user_list, managers = manager_list, customers = customer_list)
 
 
 @app.route('/item_search')
 def item_search():
-    return render_template("item_search.html")
+    store = request.args.get('store')
+    products = get_items_by_store(store)
+    print(products)
+    return render_template("item_search.html", products=products)
 
 
 @app.route('/search_results')
 def search_results():
-    return render_template("search_results.html")
-    
+    #Retreives the variables from the URL
+    search = request.args.get('search')
+    store = request.args.get('store')
+    #Calls the search function
+    items = get_items_from_search(search, store)
+    print (items)
+    return render_template("search_results.html",items=items)
+
 
 if __name__ == '__main__':
     app.run()
