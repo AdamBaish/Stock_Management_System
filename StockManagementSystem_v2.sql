@@ -390,6 +390,11 @@ INSERT INTO employee_manager_link VALUES ('E02', 'M02');
 INSERT INTO employee_manager_link VALUES ('E03', 'M03');
 INSERT INTO employee_manager_link VALUES ('E04', 'M04');
 INSERT INTO employee_manager_link VALUES ('E05', 'M05');
+INSERT INTO employee_manager_link VALUES ('E06', 'M01');
+INSERT INTO employee_manager_link VALUES ('E07', 'M02');
+INSERT INTO employee_manager_link VALUES ('E08', 'M03');
+INSERT INTO employee_manager_link VALUES ('E09', 'M04');
+INSERT INTO employee_manager_link VALUES ('E10', 'M05');
 
 COMMIT;
 
