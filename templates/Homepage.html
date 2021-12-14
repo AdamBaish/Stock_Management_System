@@ -28,20 +28,23 @@
                         <a class="nav-link" href="/Manage_Users">Manage Users</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <!-- for navSearchBar -->
-                    <input class="form-control me-2" type="text" id="navSearchBar" placeholder="Search for products">
-                    <button class="btn btn-primary" onclick="navSearch()" type="button">Search</button>
-                </form>
             </div>
         </div>
     </nav>
     <!--Navigation bar-->
+    <style>
+        body {
+          background-image: url("static/Background.jpg");
+          background-repeat: no-repeat;
+          background-attachment: fixed;  
+          background-size: cover;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container p-5 my-5 border">
-        <h1>Stock management system for ...</h1>
+    <div class="container p-5 my-5">
+        <h1>Welcome to our Stock Management System. <br><small>Please select a store from the list below.</small></h1>
         <div class="dropdown">
             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                 Select a store from the list below
@@ -62,30 +65,6 @@
         crossorigin="anonymous"></script>
 
     <script>
-        //These functions should be in every page so that the search bar works
-        function getParameterByName(name, url = window.location.href) {
-            //Function to get specific parameters from the URL
-            //Uses RegEx to calculate what the url
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
-
-        function navSearch() {
-            //Function to allow the usage of the search bar in the top right
-            var toSearch = document.getElementById("navSearchBar").value;
-            var store = getParameterByName('store');
-            if (store != "") {
-                var linkToSearch = "/search_results?search=" + toSearch + "&store=" + store;
-            } else {
-                var linkToSearch = "/search_results?search=" + toSearch;
-            }
-            window.location.href = linkToSearch;
-        }
-
         var login = {{login|tojson}};
         if (login == "Success"){
             alert("You are successfully logged in");
