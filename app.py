@@ -100,6 +100,10 @@ def delete_account(delete_id, account):
     cur.close()
     return "OK", 200
 
+
+
+
+
 def get_login_details():
     """Query data from the login table"""
     conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
@@ -206,7 +210,7 @@ def get_items_by_store(store):
 
 def get_stores_names():
     """Query data from the store table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=!password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
     cur.execute("SELECT location_area FROM location_table")    #executues query
     print("The number of parts: ", cur.rowcount)
@@ -259,11 +263,11 @@ def login():
 
 
 @app.route('/Manage_Users')
-def manage_users():    
-    user_list = get_employees()
-    manager_list = get_managers()
-    customer_list = get_customers()
-    return render_template("Manage_Users.html", employees = user_list, managers = manager_list, customers = customer_list)
+def manage_users():
+    """Send users data to front-end"""
+    print(f" Manage Users page loaded ")
+    users_list = get_account_list("manager_table") + get_account_list("employee_table") + get_account_list("customer_table")
+    return render_template("Manage_Users.html", users = users_list)
 
 # Function to update user role. Id letters for account type : M - manager, E - employee, C- customer
 @app.route('/api/manage_users/', methods=['PUT'])
