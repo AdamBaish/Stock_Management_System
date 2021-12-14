@@ -120,17 +120,52 @@ function navSearch(){
         var linkToSearch =  "/search_results?search=" + toSearch;
     }
     window.location.href = linkToSearch;
-}
 
+ 
+// Selecting table of managers, employees and customers
 var container = document.querySelector('#manageAccount');
 
-  // Click handler for entire DIV container
+  // Adding event handlers for each button in the table
   container.addEventListener('click', function (e) {
-    // But only alert for elements that have an alert-button class
-    if (e.target.classList.contains('btn btn-primary')) {
-      alert(e.target.id);
-    }
-  });
+    // Adding functionality to 'Save Button'
+    if ( e.target.id.includes('saveButton')) {
+      // Get last 3 symbols from 'Save Button' id
+      var id = e.target.id.slice(-3);
+      // Checking which of the 3 radio buttons is checked
+      if (document.getElementById('managerSelect'+ id).checked){
+        sendUserId( id,"manager" );
+      }
+        else if (document.getElementById('employeeSelect'+ id).checked){
+          sendUserId( id,"employee" );
+        }
+          else {
+            sendUserId( id,"customer" );
+          }
+      }
+  }
+  );
+
+// Function for sending update user data to API
+function sendUserId(userId, role)
+  {
+      // Preparing PUT request for sending info to backend
+      var xhr = new XMLHttpRequest();
+      xhr.open("PUT", "/api/manage_users/", true);
+      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      // Sending user ID and their new roled - Manager, Employee or Customer
+      // Changing into JSON format to be read by Python
+      xhr.send(JSON.stringify({ "id":userId,"newrole": role }));
+      xhr.onreadystatechange = function(e) {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              // Refreshing page to show updated users list
+              window.location.reload();
+          }
+          else if (xhr.status !== 200)  {
+              alert("Save user error " + xhr.status);
+          }
+      };
+  }
+
 
 </script>
 
