@@ -204,6 +204,24 @@ def get_items_by_store(store):
     products = [item for t in products for item in t]    #list comprehension to put the data in a more usable format
     return products
 
+def get_stores_names():
+    """Query data from the store table"""
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=!password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    cur.execute("SELECT location_area FROM location_table")    #executues query
+    print("The number of parts: ", cur.rowcount)
+    row = cur.fetchone()
+    store_names_lt=[]
+
+    while row is not None:
+        store_names_lt.append(row)    #appends the stores into a list
+        row = cur.fetchone()
+
+    cur.close()
+    store_names = [item for t in store_names_lt for item in t]    #list comprehension to put the data in a more usable format
+    return store_names
+store_names = get_stores_names()
+
 
 @app.route('/')
 def home_page():
