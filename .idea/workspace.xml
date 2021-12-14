@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="db1c903f-c190-4b96-842e-30957a390c27" name="Changes" comment="" />
+    <list default="true" id="db1c903f-c190-4b96-842e-30957a390c27" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,7 +23,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
-  <component name="RunManager" selected="Python.Stock_Management_System">
+  <component name="RunManager" selected="Flask server.Flask">
     <configuration name="Stock_Management_System" type="PythonConfigurationType" factoryName="Python">
       <module name="Stock_Management_System" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -95,6 +97,7 @@
       <workItem from="1639482835194" duration="61000" />
       <workItem from="1639482976597" duration="539000" />
       <workItem from="1639484073570" duration="8000" />
+      <workItem from="1639484247968" duration="290000" />
     </task>
     <servers />
   </component>
@@ -102,7 +105,7 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Stock_Management_System$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1639483294447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Stock_Management_System$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1639484261440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Stock_Management_System$Stock_Management_System.coverage" NAME="Stock_Management_System Coverage Results" MODIFIED="1639483253230" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>

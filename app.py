@@ -15,59 +15,90 @@ app = Flask(__name__)
 
 
 """Functions to query tables"""
-def get_employees():
-    """Query data from the employee table"""
+def get_account_list(accountType):
+    """Query data from either the customer, employee or manager tables"""
     conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
-    cur.execute("SELECT * FROM employee_table")    #executues query 
-    print("The number of parts: ", cur.rowcount)
+    cur.execute(f"SELECT * FROM {accountType}")    #executues query
+    print(f"The number of users in {accountType}_table:  {cur.rowcount}")
     row = cur.fetchone()
-    employees=[]
+    accountList=[]
 
     while row is not None:
-        employees.append(row)    #appends the employees into a list
+        accountList.append(row)    #appends either the customer, employee or manager into a list
         row = cur.fetchone()
 
     cur.close()
-    print (employees)
-    return employees
+    return accountList
 
-
-def get_managers():
-    """Query data from the employee table"""
+def read_account(id, account ):
+    """Read single account data by id from account database table"""
     conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
-    cur.execute("SELECT * FROM employee_table")    #executues query 
-    print("The number of parts: ", cur.rowcount)
-    row = cur.fetchone()
-    managers=[]
 
-    while row is not None:
-        managers.append(row)    #appends the managers into a list
-        row = cur.fetchone()
+    cur.execute (f"SELECT * FROM {account}_table WHERE {account}_id::text ='{id}'")
+    account_info = cur.fetchall()
 
+    cur.execute (f"SELECT fk_store_id FROM store_{account}_link WHERE fk_{account}_id::text ='{id}'")
+    store_link = cur.fetchall()
+    print(f"Store link {store_link}")
+    account_info = account_info + store_link
+
+    cur.execute (f"SELECT fk_username FROM login_{account}_link WHERE fk_{account}_id::text ='{id}'")
+    login_link = cur.fetchall()
+    print(f"Store link {login_link}")
+    account_info = account_info + login_link
     cur.close()
-    print (managers)
-    return managers
+    print(f" Account details : {account_info}")
+    return account_info
 
-
-def get_customers():
-    """Query data from the employee table"""
+def insert_account(letter_id, account_details, account):
+    """Insert single account data in database table"""
     conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
-    cur.execute("SELECT * FROM employee_table")    #executues query 
-    print("The number of parts: ", cur.rowcount)
-    row = cur.fetchone()
-    customers=[]
+    # Get max. index from table
+    cur.execute(f"SELECT {account}_id FROM {account}_table WHERE {account}_id=( SELECT max({account}_id) FROM {account}_table)")
+    max_index = cur.fetchall()
+    max_index = max_index[0][0]
+    user_index = int(max_index[-2:]) + 1
+    print(f" user count {user_index}")
+    print(f" Insert function {account_details}")
 
-    while row is not None:
-        customers.append(row)    #appends the customers into a list
-        row = cur.fetchone()
+    if user_index < 10 :
+        cur.execute(f"INSERT INTO {account}_table VALUES ('{letter_id}0{user_index}', '{account_details[0][1]}', '{account_details[0][2]}');")
+        cur.execute(f"INSERT INTO login_{account}_link VALUES ('{account_details[2][0]}', '{letter_id}0{user_index}');")
+        cur.execute(f"INSERT INTO store_{account}_link VALUES ('{account_details[1][0]}', '{letter_id}0{user_index}');")
+    else :
+        cur.execute(f"INSERT INTO {account}_table VALUES ('{letter_id}{user_index}', '{account_details[0][1]}', '{account_details[0][2]}');")
+        cur.execute(f"INSERT INTO login_{account}_link VALUES ('{account_details[2][0]}', '{letter_id}{user_index}');")
+        cur.execute(f"INSERT INTO store_{account}_link VALUES ('{account_details[1][0]}', '{letter_id}{user_index}');")
+        print(f" Elements more than 10")
 
+    conn.commit()
     cur.close()
-    print (customers)
-    return customers
+    return "OK", 200
 
+def delete_account(delete_id, account):
+    """Delete single user account data from database table"""
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    cur = conn.cursor()
+    print(f"Ready to delete {delete_id} from table {account}")
+    cur.execute(f"DELETE FROM store_{account}_link WHERE fk_{account}_id::text= '{delete_id}'")
+    conn.commit()
+    cur.execute(f"DELETE FROM login_{account}_link WHERE fk_{account}_id::text= '{delete_id}'")
+    conn.commit()
+    if (account == 'manager') or (account =='employee'):
+        try :
+            cur.execute(f"DELETE FROM employee_manager_link WHERE fk_{account}_id::text= '{delete_id}'")
+            conn.commit()
+        except:
+            print("No row in employee_manager_link table.")
+    cur.execute(f"DELETE FROM login_{account}_link WHERE fk_{account}_id::text= '{delete_id}'")
+    conn.commit()
+    cur.execute(f"DELETE FROM {account}_table WHERE {account}_id::text= '{delete_id}'")
+    conn.commit()
+    cur.close()
+    return "OK", 200
 
 def get_login_details():
     """Query data from the login table"""
@@ -216,6 +247,32 @@ def manage_users():
     customer_list = get_customers()
     return render_template("Manage_Users.html", employees = user_list, managers = manager_list, customers = customer_list)
 
+# Function to update user role. Id letters for account type : M - manager, E - employee, C- customer
+@app.route('/api/manage_users/', methods=['PUT'])
+def updateUserRole():
+    user_data = request.get_json()
+    id = user_data["id"]
+    new_role = user_data["newrole"]
+    if "M" in id :
+        old_role = "manager"
+    elif "E" in id :
+        old_role = "employee"
+    else :
+        old_role = "customer"
+    # Select first letter for new account id
+    if new_role == "manager" :
+        letter_id = 'M'
+    elif new_role == "employee" :
+        letter_id = 'E'
+    else :
+        letter_id = 'C'
+
+    print(f"Data received {id}, {old_role}")
+    info = read_account(id, old_role)
+    print(f" Data read from db : {info}")
+    insert_account(letter_id, info, new_role)
+    delete_account(id, old_role)
+    return "OK",200
 
 @app.route('/item_search')
 def item_search():
