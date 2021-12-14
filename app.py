@@ -1,10 +1,8 @@
 """
 app.py
 """
-from re import L
 from flask import Flask
 from flask import render_template
-from flask import jsonify
 from flask import request, url_for
 
 import psycopg2
@@ -206,7 +204,7 @@ def get_items_by_store(store):
 
 def get_stores_names():
     """Query data from the store table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=!password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
     cur.execute("SELECT location_area FROM location_table")    #executues query
     print("The number of parts: ", cur.rowcount)
