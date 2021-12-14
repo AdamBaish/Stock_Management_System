@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db1c903f-c190-4b96-842e-30957a390c27" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44859433-502f-44d5-bdbf-91ba28d5bc47.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/44859433-502f-44d5-bdbf-91ba28d5bc47.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44859433-502f-44d5-bdbf-91ba28d5bc47/storage_v2/_src_/database/stockmanagementsystem.SHewyQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/44859433-502f-44d5-bdbf-91ba28d5bc47/storage_v2/_src_/database/stockmanagementsystem.SHewyQ/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d5dbb67b-2f9b-4dff-8904-bb8a5a2a7c28.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d5dbb67b-2f9b-4dff-8904-bb8a5a2a7c28/storage_v2/_src_/database/stockmanagementsystem.SHewyQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d5dbb67b-2f9b-4dff-8904-bb8a5a2a7c28/storage_v2/_src_/database/stockmanagementsystem.SHewyQ/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d5dbb67b-2f9b-4dff-8904-bb8a5a2a7c28/storage_v2/_src_/database/stockmanagementsystem.SHewyQ/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d5dbb67b-2f9b-4dff-8904-bb8a5a2a7c28/storage_v2/_src_/database/stockmanagementsystem.SHewyQ/schema/public.abK9xQ.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
@@ -55,6 +48,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="Stock_Management_System" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Flask" type="Python.FlaskServer" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -86,6 +101,7 @@
       <workItem from="1639484073570" duration="8000" />
       <workItem from="1639484247968" duration="290000" />
       <workItem from="1639489160026" duration="630000" />
+      <workItem from="1639489909279" duration="35000" />
     </task>
     <servers />
   </component>
@@ -93,7 +109,7 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Stock_Management_System$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1639489656360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Stock_Management_System$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1639489916582" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/Stock_Management_System$Stock_Management_System.coverage" NAME="Stock_Management_System Coverage Results" MODIFIED="1639483253230" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
