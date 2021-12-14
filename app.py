@@ -1,10 +1,8 @@
 """
 app.py
 """
-from re import L
 from flask import Flask
 from flask import render_template
-from flask import jsonify
 from flask import request, url_for
 
 import psycopg2
