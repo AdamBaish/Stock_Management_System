@@ -30,10 +30,6 @@
                         <a class="nav-link" href="/Manage_Users">Manage Users</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="text" id="navSearchBar" placeholder="Search for products">
-                    <button class="btn btn-primary" onclick="navSearch()" type="button">Search</button>
-                </form>
             </div>
         </div>
     </nav>
@@ -146,37 +142,6 @@
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-    <script>
-        //These functions should be in every page so that the search bar works
-        function getParameterByName(name, url = window.location.href) {
-            //Function to get specific parameters from the URL
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
-
-        function navSearch() {
-            //Function to allow the usage of the search bar in the top right
-            var toSearch = document.getElementById("navSearchBar").value;
-            var store = getParameterByName('store');
-            if (store != "") {
-                var linkToSearch = "/search_results?search=" + toSearch + "&store=" + store;
-            } else {
-                var linkToSearch = "/search_results?search=" + toSearch;
-            }
-            window.location.href = linkToSearch;
-        }
-        window.location.href = linkToSearch;
-
-    /*
-    function popTable(){
-        WIP
-    }
-    */
-    </script>
 </body>
 
 </html>

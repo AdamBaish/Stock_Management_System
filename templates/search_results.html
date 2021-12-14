@@ -28,14 +28,19 @@
                         <a class="nav-link" href="/Manage_Users">Manage Users</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="text" id="navSearchBar" placeholder="Search for products">
-                    <button class="btn btn-primary" onclick="navSearch()" type="button">Search</button>
-                </form>
             </div>
         </div>
     </nav>
     <!--Navigation bar-->
+
+    <style>
+        body {
+          background-image: url("static/Background.jpg");
+          background-repeat: no-repeat;
+          background-attachment: fixed;  
+          background-size: cover;
+        }
+    </style>
 </head>
 
 <body>
@@ -45,8 +50,8 @@
             <thead>
                 <tr>
                     <th>Product</th>
-                    <th>Quantity in stock</th>
                     <th>Price</th>
+                    <th>Quantity in stock</th>
                 </tr>
             </thead>
             <tbody>
@@ -72,18 +77,6 @@
             if (!results) return null;
             if (!results[2]) return '';
             return decodeURIComponent(results[2].replace(/\+/g, ' '));
-        }
-
-        function navSearch() {
-            //Function to allow the usage of the search bar in the top right
-            var toSearch = document.getElementById("navSearchBar").value;
-            var store = getParameterByName('store');
-            if (store != "") {
-                var linkToSearch = "/search_results?search=" + toSearch + "&store=" + store;
-            } else {
-                var linkToSearch = "/search_results?search=" + toSearch;
-            }
-            window.location.href = linkToSearch;
         }
 
         function onLoad() {
