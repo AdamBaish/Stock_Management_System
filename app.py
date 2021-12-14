@@ -18,7 +18,7 @@ app = Flask(__name__)
 """Functions to query tables"""
 def get_account_list(accountType):
     """Query data from either the customer, employee or manager tables"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=!password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
     cur.execute(f"SELECT * FROM {accountType}")    #executues query
     print(f"The number of users in {accountType}_table:  {cur.rowcount}")
@@ -34,7 +34,7 @@ def get_account_list(accountType):
 
 def read_account(id, account ):
     """Read single account data by id from account database table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=!password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
 
     cur.execute (f"SELECT * FROM {account}_table WHERE {account}_id::text ='{id}'")
@@ -55,7 +55,7 @@ def read_account(id, account ):
 
 def insert_account(letter_id, account_details, account):
     """Insert single account data in database table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=!password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
     # Get max. index from table
     cur.execute(f"SELECT {account}_id FROM {account}_table WHERE {account}_id=( SELECT max({account}_id) FROM {account}_table)")
@@ -81,7 +81,7 @@ def insert_account(letter_id, account_details, account):
 
 def delete_account(delete_id, account):
     """Delete single user account data from database table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=!password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
     print(f"Ready to delete {delete_id} from table {account}")
     cur.execute(f"DELETE FROM store_{account}_link WHERE fk_{account}_id::text= '{delete_id}'")
@@ -103,7 +103,7 @@ def delete_account(delete_id, account):
 
 def get_login_details():
     """Query data from the login table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=!password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
     cur.execute("SELECT * FROM login_table")    #executues query
     print("The number of parts: ", cur.rowcount)
@@ -205,7 +205,7 @@ def get_items_by_store(store):
 
 def get_stores_names():
     """Query data from the store table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=!password")    #connects to the database (Username/Password will need to be changed according to what you setup)
+    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
     cur.execute("SELECT location_area FROM location_table")    #executues query
     print("The number of parts: ", cur.rowcount)
