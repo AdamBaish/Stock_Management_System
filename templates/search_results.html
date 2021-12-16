@@ -50,8 +50,8 @@
             <thead>
                 <tr>
                     <th>Product</th>
-                    <th>Price</th>
                     <th>Quantity in stock</th>
+                    <th>Price</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,7 +82,7 @@
         function onLoad() {
             var store = getParameterByName('store');
             var search = getParameterByName('search');
-            document.getElementById("target").textContent = "Displaying results for " + search + " in the " + store + " store"
+            document.getElementById("target").textContent = "These are the results for " + search + " in the " + store + " store"
         }
 
         function myFunction() {
@@ -94,8 +94,8 @@
             var quantity = row.insertCell(1);
             var price = row.insertCell(2);
             product.innerHTML = items[0];
-            quantity.innerHTML = items[1];
-            price.innerHTML = items[2];
+            quantity.innerHTML = items[2];
+            price.innerHTML = "£"+items[1];
         }
 
         onLoad();
