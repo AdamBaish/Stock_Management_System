@@ -289,6 +289,9 @@ def search_results():
     #Calls the search function
     items = get_items_from_search(search, store)
     print (items)
+    if items == []:
+        items = ["Product not found", "N/A", "N/A"]
+        print (items)
     return render_template("search_results.html",items=items)
 
 
