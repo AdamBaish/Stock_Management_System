@@ -51,7 +51,7 @@
     <div class="container mt-3">
         <form>
             <label for="product" class="form-label">Choose your product from the list:</label>
-            <input class="form-control" list="products" name="product" id="product">
+            <input placeholder="Pick a result from the list or start typing to find your product" class="form-control" list="products" name="product" id="product">
             <datalist id="products">
                 {% for product in products %}
                 <option value="{{product}}">
