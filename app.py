@@ -1,5 +1,6 @@
 """
 app.py
+Website for 
 """
 from re import L
 from flask import Flask
@@ -100,9 +101,6 @@ def delete_account(delete_id, account):
     return "OK", 200
 
 
-
-
-
 def get_login_details():
     """Query data from the login table"""
     conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
@@ -141,30 +139,10 @@ def get_permissons(username):
     return permission
 
 
-def get_stores_names():
-    """Query data from the store table"""
-    conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
-    cur = conn.cursor()
-    cur.execute("SELECT location_area FROM location_table")    #executues query 
-    print("The number of parts: ", cur.rowcount)
-    row = cur.fetchone()
-    store_names_lt=[]
-
-    while row is not None:
-        store_names_lt.append(row)    #appends the stores into a list
-        row = cur.fetchone()
-
-    cur.close()
-    store_names = [item for t in store_names_lt for item in t]    #list comprehension to put the data in a more usable format
-    return store_names
-store_names = get_stores_names()
-
-
 def get_items_from_search(search, store):
     """Query data from the store table"""
     search = " '" + search + "';"
-    store = " '" + store + "' "
-    print(search + store)
+    store = " '" + store + "' "    #puts the variables into the correct format for the query
     conn = psycopg2.connect("dbname=stockmanagementsystem user=postgres password=Password")    #connects to the database (Username/Password will need to be changed according to what you setup)
     cur = conn.cursor()
     query = "SELECT product_name, product_price, product_quantity FROM store_table, product_table, store_product_link WHERE store_product_link.fk_store_id = store_table.store_id AND product_table.product_id = store_product_link.fk_product_id AND product_name =" + search
